@@ -13,9 +13,9 @@ Registerd users can perform below listed tasks: <br />
 All the data is being saved to text files, so no data is lost when application runs again after closing.
 
 # Test Users
-1. 	SSN : 1990-roh
+1. 	SSN : 1990-roh<br />
 	Password : Pas$w0rd
-2. 	SSN : 1990-rrr
+2. 	SSN : 1990-rrr<br />
 	Password : Pas$w0rd
 	
 
