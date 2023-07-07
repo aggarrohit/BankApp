@@ -1,0 +1,50 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+'After signup/login, User becomes User of the bank
+
+System -> User: Task Select Request
+
+alt 1. Change Account Password
+System -> User: Enter Old Password
+User --> System: Enters Old Password
+System -> Database: Check Password
+    alt password match - follow sequence of create password in SequenceDiagramPerson
+    else password do not match
+        System --> User: Incorrect password
+    end
+
+else 2. Deposit Money
+System -> User: Enter Amount
+User --> System: Enters Amount
+    alt invalid amount
+        System -> User:Please enter valid amount
+    else valid amount
+        System->Database:update account balance and add to transactions
+        System-->User:Money Deposited successfully
+    end
+
+else Withdraw Money
+System -> User: Enter Amount
+User --> System: Enters Amount
+System->Database:Check account balance
+    alt insufficient balance
+        System -> User:Please enter amount upto x
+    else sufficient balance
+        System->Database:update account balance and add to transactions
+        System-->User:Money Withdrawn successfully
+    end
+
+else Send Money
+System->Database:get all accounts
+System-->User:select account
+User->System:Enters account serial number
+System->User:(follows withdraw money sequence)
+
+else View Transactions
+System->Database:get account transactions
+System-->User:shows all transactions table
+
+end
+
+@enduml

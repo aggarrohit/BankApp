@@ -1,0 +1,54 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class BaseController{
++showFirstMenu()
+-handleFirstMenuOptions()
++readNumberInput()
++readTextInput()
+}
+
+class UserController{
+-transactionAction()
+}
+
+BaseController--|>UserController
+
+
+class AccountAccess{
++startSignup()
++changePassword()
++proceedToLogin()
+}
+
+BaseController--|>AccountAccess
+UserController-->AccountAccess
+
+interface IUserServices{
+showUserMenu()
+handleUserMenuOptions()
+changePassword()
+login()
+signup()
+logout()
+showTransactions()
+}
+
+UserController ..|> IUserServices
+
+class TransactionController{
++handleTransaction()
++requestAmount()
+}
+
+BaseController--|>TransactionController
+
+interface ITransactionServices{
+depositMoney()
+withdrawMoney()
+sendMoney()
+}
+
+TransactionController ..|> ITransactionServices
+UserController-->TransactionController
+@enduml

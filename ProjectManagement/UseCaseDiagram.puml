@@ -1,0 +1,44 @@
+@startuml
+'https://plantuml.com/use-case-diagram
+
+
+left to right direction
+
+package Role{
+    actor User as U
+}
+
+package Actions{
+    usecase "Create Account" as CA
+    usecase "Change Password" as CP
+    usecase "Deposit/Withdraw" as DW
+    usecase "Send Money" as SM
+    usecase "View Transactions" as VT
+
+}
+
+package IncludeActions{
+
+    usecase "Login/Logout" as LL
+
+
+}
+
+
+
+
+U --> (CA)
+U --> (CP)
+U --> (DW)
+U --> (SM)
+U --> (VT)
+
+
+(CP) .> (LL):include
+(DW) .> (LL):include
+(SM) .> (LL):include
+(VT) .> (LL):include
+
+
+
+@enduml

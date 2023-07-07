@@ -1,0 +1,63 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+'autonumber
+
+System -> Person: Task Select Request
+
+alt 1. Login
+System -> Person: Enter SSN
+Person --> System: Enters SSN
+System -> Database: Check SSN
+    alt
+        Database --> System: SSN not found
+        System --> Person: Incorrect SSN
+    else no week created
+        Database --> System: SSN found
+        System -> Person: Enter Password
+        System -> Database: Check SSN and Password
+
+        alt
+            Database --> System: User found
+            System -->Person:Login Success - Shows User Menu
+        else
+            Database --> System: User not found
+            System -->Person: Incorrect Password
+        end
+
+    end
+
+else 2. Signup
+System -> Person: Enter SSN in format (0000-AAA)
+Person --> System: Enters SSN
+    alt invalid SSN
+        System -> Person:Please enter correct SSN in required format
+    else valid SSN
+        System->Database:check if ssn already exists
+        alt SSN found
+            System-->Person:SSN already exists
+        else SSN not found
+            System-->Person:Enter full name
+            Person -> System: Enters full name
+            System-->Person:Enter password
+            Person -> System: Enters password
+            alt password acceptable
+                System-->Person:Re-Enter password
+                Person -> System: Re-Enters password
+                alt passwords match
+                    System->Database:create user account
+                    System-->Person: account created
+                else passwords do not match
+                    System->Person:re-enter password
+                end
+            else password not acceptable
+                System->Person:enter different password
+            end
+
+    end
+
+
+
+end
+
+@enduml

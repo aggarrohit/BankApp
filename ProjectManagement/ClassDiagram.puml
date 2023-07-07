@@ -1,0 +1,75 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+
+UsersFileHelper "1" *-- "0..*" User
+
+class UsersFileHelper{
+
++getUsers():(users:List<User>)
++addUser(user:User):void
++updateUser(oldUser,newUser):void
++getUserBySsnPassword(ssn,password):void
++isSsnPresent(ssn):String
+
+}
+
+class User{
+-String:fullName
+-date:dateOfBirth(optional)
+-String:ssn (unique)
+-String:password
+
+}
+
+User "1" *-- "1..*" Account
+AccountsFileHelper "1" *-- "0..*" Account
+
+class AccountsFileHelper{
+- static List<Account>:accounts
+static{populate from the txt file}
+
++createAccount(ssn:String):(accountNumber:int)
+}
+
+class Account{
+-int:accountNumber (unique)
+-String:ssn
+-BigDecimal:balance
+
++getBalance(accountNumber:int):(balance:BigDecimal)
+}
+
+Account "1" *-- "1" Transactions
+
+class Transactions{
+- List<Transaction>:transactions
+
++getTransactions(accountNumber:int):List<Transaction>
+
+}
+
+Transactions "1" *-- "0..*" Transaction
+
+class Transaction{
+-int:transactionId (unique)
+-int:accountNumber
+-TransactionType:transactionType
+-BigDecimal:debit
+-BigDecimal:credit
+}
+
+enum TransactionType {
+DEPOSIT,
+WITHDRAWAL,
+SENT_MONEY,
+RECEIVED_MONEY
+}
+
+class Utils{
++getHashedPassword(password:String):(hashedPassword:String)
++createAccountNumber(yearOfBirth:int):(accountNumber:int)
++isPasswordAcceptable(password:String):boolean
+}
+
+@enduml
