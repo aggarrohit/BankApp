@@ -12,6 +12,13 @@ Registerd users can perform below listed tasks: <br />
 
 All the data is being saved to text files, so no data is lost when application runs again after closing.
 
+# Test Users
+1. 	SSN : 1990-roh
+	Password : Pas$w0rd
+2. 	SSN : 1990-rrr
+	Password : Pas$w0rd
+	
+
 
 # Tests
 I have included some test cases that can be found in the _tests_ folder inside src folder
